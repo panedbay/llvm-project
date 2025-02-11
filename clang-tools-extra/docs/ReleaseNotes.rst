@@ -91,6 +91,11 @@ Improvements to clang-tidy
 New checks
 ^^^^^^^^^^
 
+- New :doc:`misc-fixed-adress-assignment
+  <clang-tidy/checks/misc/fixed-adress-assignment>` check.
+
+  FIXME: Write a short description.
+
 New check aliases
 ^^^^^^^^^^^^^^^^^
 
