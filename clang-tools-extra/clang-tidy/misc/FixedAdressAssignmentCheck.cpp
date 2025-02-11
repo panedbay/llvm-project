@@ -52,10 +52,11 @@ Finder->addMatcher(
   ).bind("assignment"),
   this);
 
- 
+
 Finder->addMatcher(
   initListExpr(hasDescendant(PointerConstantExprMatcher.bind("E"))).bind("assignment"),
   this);
+
 
   Finder->addMatcher(
     callExpr(
@@ -63,7 +64,6 @@ Finder->addMatcher(
     ).bind("callExpr"),
     this);
     
-
 
 Finder->addMatcher(
   returnStmt(
@@ -78,7 +78,6 @@ Finder->addMatcher(
       forEach(expr(PointerConstantExprMatcher.bind("E")))
   ).bind("initList"),
   this);
-
 }
 
 void FixedAdressAssignmentCheck::check(const MatchFinder::MatchResult &Result) {
@@ -86,13 +85,9 @@ void FixedAdressAssignmentCheck::check(const MatchFinder::MatchResult &Result) {
   const auto *E = Result.Nodes.getNodeAs<Expr>("E");
   const auto *I = Result.Nodes.getNodeAs<IntegerLiteral>("I");
   
-  
-  Expr::EvalResult Res;
-  ASTContext &Context = *Result.Context;
-  
-
-
   if (const auto *I = Result.Nodes.getNodeAs<IntegerLiteral>("I")) {
+    Expr::EvalResult Res;
+    ASTContext &Context = *Result.Context;
     if (I->EvaluateAsInt(Res, Context)) {
       llvm::APSInt Value = Res.Val.getInt();
       if (Value != 0) {
